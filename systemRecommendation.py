@@ -1,5 +1,6 @@
 import pandas as pd
 import torch
+import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load pre-trained RoBERTa model
@@ -7,7 +8,7 @@ roberta = torch.hub.load('pytorch/fairseq', 'roberta.large')
 roberta.eval()
 
 # Load the Amazon products dataset
-amazon_data = pd.read_csv('/home/sagemaker-user/fairseq/fairseq/data/awstestdata.csv')
+amazon_data = pd.read_csv('/home/sagemaker-user/fairseq-Bert-Rec-SystemRecommendation/Datasets/testdata_smallsize.csv')
 
 # Use name and main_category for item representation
 items = amazon_data[['name', 'main_category']].apply(lambda x: f"{x['name']} - Category: {x['main_category']}", axis=1).tolist()
